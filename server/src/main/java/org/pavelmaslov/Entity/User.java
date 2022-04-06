@@ -14,14 +14,14 @@ import javax.validation.constraints.Size;
 @Setter
 @RequiredArgsConstructor
 @Entity
-@Table(name = "holders")
-public class AccountHolder {
+@Table(name = "users")
+public class User {
 
     @Id
     @NotBlank
     private String login;
 
     @NotBlank
-    @Size(min=8)
+    @Size(min=4)
     private String password;
 }

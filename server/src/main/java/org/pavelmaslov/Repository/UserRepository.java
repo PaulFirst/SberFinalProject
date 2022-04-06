@@ -1,9 +1,9 @@
 package org.pavelmaslov.Repository;
 
-import org.pavelmaslov.Entity.AccountHolder;
+import org.pavelmaslov.Entity.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AccountHolderRepository extends CrudRepository<AccountHolder, String> {
+public interface UserRepository extends CrudRepository<User, String> {
 }
