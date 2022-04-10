@@ -1,12 +1,10 @@
-package org.pavelmaslov.config;
+package org.pavelmaslov.server.config;
 
-import org.pavelmaslov.Service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -28,10 +26,13 @@ public class WebSecurityConfigurerImpl extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .mvcMatchers("/h2-console").permitAll()
+        http
+                .authorizeRequests()
+                .antMatchers("/").permitAll()
+                .mvcMatchers("/console/*").permitAll()
                 .mvcMatchers("/api/register").permitAll()
-                .mvcMatchers("/**").authenticated()
+                .mvcMatchers("/atm").authenticated()
+                .mvcMatchers("/user/*").authenticated()
                 .and()
                 .httpBasic()
                 .and()

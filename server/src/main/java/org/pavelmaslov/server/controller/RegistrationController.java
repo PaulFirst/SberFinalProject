@@ -1,7 +1,7 @@
-package org.pavelmaslov.Controller;
+package org.pavelmaslov.server.controller;
 
-import org.pavelmaslov.Entity.User;
-import org.pavelmaslov.Repository.UserRepository;
+import org.pavelmaslov.server.entity.User;
+import org.pavelmaslov.server.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +23,7 @@ public class RegistrationController {
     @PostMapping("api/register")
     public ResponseEntity<Void> register(@Valid @RequestBody User user) {
         user.setPassword(encoder.encode(user.getPassword()));
-        if (!userRepository.existsById(user.getLogin())) {
+        if (!userRepository.existsByLogin(user.getLogin())) {
             userRepository.save(user);
             return new ResponseEntity<>(HttpStatus.OK);
         }

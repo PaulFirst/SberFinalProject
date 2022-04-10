@@ -1,4 +1,4 @@
-package org.pavelmaslov;
+package org.pavelmaslov.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
