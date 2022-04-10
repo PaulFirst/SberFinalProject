@@ -31,7 +31,7 @@
 - запрос состояния баланса счета по номеру аккаунта для данного пользователя
 
 
-    Адрес обращения: localhost:8091/my/accounts/balance/?accountId={номер}
+    Адрес обращения: http://localhost:8091/my/accounts/balance/?accountId={номер}
 
     Тип запроса: POST
 
