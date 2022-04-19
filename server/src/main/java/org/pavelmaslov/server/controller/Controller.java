@@ -29,7 +29,7 @@ public class Controller {
     @GetMapping("/user/accounts/")
     public String getAccountsForUser(Authentication auth) {
         List<String> userAccounts = new ArrayList<>();
-        userService.getUser(auth.getName()).getAccountDTOs().forEach(accountDTO -> {
+        userService.getUserByLogin(auth.getName()).getAccountDTOs().forEach(accountDTO -> {
             userAccounts.add(Integer.toString(accountDTO.getAccountId()));
         });
 
@@ -44,7 +44,7 @@ public class Controller {
     @GetMapping("/user/accounts/balance/")
     public String getUserAccountBalance(@RequestParam int accountId, Authentication auth) {
         List<String> userAccounts = new ArrayList<>();
-        List<AccountDTO> result = userService.getUser(auth.getName()).getAccountDTOs().stream().filter(accountDTO -> {
+        List<AccountDTO> result = userService.getUserByLogin(auth.getName()).getAccountDTOs().stream().filter(accountDTO -> {
             return accountDTO.getAccountId() == accountId;
         }).collect(Collectors.toList());
         if (result.size() != 1) {

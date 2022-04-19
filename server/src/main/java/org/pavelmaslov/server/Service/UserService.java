@@ -37,7 +37,7 @@ public class UserService implements UserDetailsService {
                 .build();
     }
 
-    public UserDTO getUser(String login) {
+    public UserDTO getUserByLogin(String login) {
         Optional<User> optionalUser = userRepository.findByLogin(login);
         User rawUser = optionalUser.orElseThrow(() ->
                 new RuntimeException("User with current login not found"));
