@@ -10,8 +10,7 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class Controller {
 
-    //TODO:autowired?
-    RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate = new RestTemplate();
 
     @PostMapping("/my/accounts/")
     public String getMyAccounts(@RequestBody UserDTO user) {

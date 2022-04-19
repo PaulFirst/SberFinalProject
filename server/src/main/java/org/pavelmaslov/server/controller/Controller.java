@@ -15,12 +15,15 @@ import java.util.stream.Collectors;
 @RestController
 public class Controller {
 
-    @Autowired
-    UserService userService;
+    private final UserService userService;
+
+    public Controller(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/atm")
-    public String getAccount(Authentication auth) {
-        return auth.getName();
+    public String getAccount() {
+        return "ATM is working";
     }
 
     @GetMapping("/user/accounts/")
