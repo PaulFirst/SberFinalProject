@@ -15,18 +15,21 @@ import java.util.stream.Collectors;
 @RestController
 public class Controller {
 
-    @Autowired
-    UserService userService;
+    private final UserService userService;
+
+    public Controller(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/atm")
-    public String getAccount(Authentication auth) {
-        return auth.getName();
+    public String getAccount() {
+        return "ATM is working";
     }
 
     @GetMapping("/user/accounts/")
     public String getAccountsForUser(Authentication auth) {
         List<String> userAccounts = new ArrayList<>();
-        userService.getUser(auth.getName()).getAccountDTOs().forEach(accountDTO -> {
+        userService.getUserByLogin(auth.getName()).getAccountDTOs().forEach(accountDTO -> {
             userAccounts.add(Integer.toString(accountDTO.getAccountId()));
         });
 
@@ -41,7 +44,7 @@ public class Controller {
     @GetMapping("/user/accounts/balance/")
     public String getUserAccountBalance(@RequestParam int accountId, Authentication auth) {
         List<String> userAccounts = new ArrayList<>();
-        List<AccountDTO> result = userService.getUser(auth.getName()).getAccountDTOs().stream().filter(accountDTO -> {
+        List<AccountDTO> result = userService.getUserByLogin(auth.getName()).getAccountDTOs().stream().filter(accountDTO -> {
             return accountDTO.getAccountId() == accountId;
         }).collect(Collectors.toList());
         if (result.size() != 1) {
